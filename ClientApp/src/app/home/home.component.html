@@ -1,0 +1,61 @@
+<!--<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Make</th>
+      <th scope="col">Model</th>
+      <th scope="col">Handle</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let vehicule of vehicules">
+      <th scope="row">{{vehicule.id}}</th>
+      <td>{{vehicule.make}}</td>
+      <td>{{vehicule.model}}</td>
+      <td>{{vehicule.price}}</td>
+    </tr>
+  </tbody>
+</table>-->
+<div class="card-body">
+  <div class="grid-wrapper">
+    <kendo-grid [kendoGridBinding]="vehicules"
+                [pageSize]="10"
+                [pageable]="true"
+                [sortable]="true"
+                [groupable]="true"
+                [reorderable]="true"
+                [resizable]="true"
+                [height]="500"
+                [columnMenu]="{ filter: true }">
+      <kendo-grid-column title="Make" field="make"></kendo-grid-column>
+      <kendo-grid-column title="Model" field="model"></kendo-grid-column>
+      <kendo-grid-column title="Price" field="price"></kendo-grid-column>
+      <kendo-grid-column>
+        <div>
+          <ng-template kendoGridCellTemplate let-vehiculeDataItem>
+            <button *ngIf="vehiculeDataItem.licensed" type="button" (click)="NavigateToVehicule(vehiculeDataItem.id)" class="btn btn-info">Info</button>
+          </ng-template>
+        </div>
+      </kendo-grid-column>
+      <kendo-grid-messages filterContainsOperator="Contient"
+                           filterEndsWithOperator="Ends with"
+                           filterEqOperator="Equal"
+                           filterNotEqOperator="Different of"
+                           filterNotContainsOperator="Not Contains"
+                           filterStartsWithOperator="Starts with"
+                           filterIsNullOperator="Is null"
+                           filterIsNotNullOperator="Is not null"
+                           filterIsEmptyOperator="Is Empty"
+                           filterIsNotEmptyOperator="Is not empty"
+                           noRecords="No records"
+                           filter="Filter"
+                           columns="Columns"
+                           columnsApply="Confirm"
+                           columnsReset="Reset"
+                           sortAscending="Sort Ascending"
+                           sortDescending="Sort Descending">
+      </kendo-grid-messages>
+    </kendo-grid>
+    <div *ngIf="Isloading" class="k-i-loading"></div>
+  </div>
+</div>
