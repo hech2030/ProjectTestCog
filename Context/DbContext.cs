@@ -32,6 +32,8 @@ namespace TestProject.Context
             modelBuilder.Entity<WarehouseModel>().HasOne(x => x.Location);
             modelBuilder.Entity<WarehouseModel>().HasOne(x => x.Cars);
 
+            modelBuilder.Entity<CarModel>().HasMany(x => x.Vehicles);
+
             base.OnModelCreating(modelBuilder);
         }
     }

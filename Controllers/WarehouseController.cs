@@ -21,12 +21,28 @@ namespace TestProject.Controllers
         }
 
         [HttpGet]
-        [Route("FindWarehouses")]
+        [Route("FindVehicle")]
         public ActionResult<WarehouseController> Get()
         {
             try
             {
                 var result = _warehouseDatabaseBusinessProvider.FindVehicule();
+                return Ok(new { result });
+            }
+            catch (Exception ex)
+            {
+                Console.Write("Exception : " + ex.Message);
+                return BadRequest(new { Message = "Exception has been occured : " + ex.Message });
+            }
+        }
+
+        [HttpPost]
+        [Route("FindWarehouse")]
+        public ActionResult<WarehouseController> GetWarehouse(WarehouseFindRequest request)
+        {
+            try
+            {
+                var result = _warehouseDatabaseBusinessProvider.FindWarehouse(request.CarId);
                 return Ok(new { result });
             }
             catch (Exception ex)

@@ -2,6 +2,6 @@
 {
     public class WarehouseFindRequest
     {
-        public long Id { get; set; }
+        public int CarId { get; set; }
     }
 }

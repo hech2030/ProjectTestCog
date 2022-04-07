@@ -67,8 +67,24 @@ namespace TestProject.Services
 
         public IList<VehiculeModel> FindVehicule()
         {
-            var query = VehiculeDataAccessProvider.AsQueryable().OrderBy(a => a.Date_Added);
+            var query = VehiculeDataAccessProvider.OrderBy(a => a.Date_Added).AsNoTracking();
             return query.ToList();
+        }
+
+        public WarehouseModel FindWarehouse(int carId)
+        {
+            if (carId == 0)
+                return null;
+            else
+            {
+                var result = WarehousContext.Where(a => a.Cars.Vehicles.Any(a => a.Id == carId))
+                    .Include(i => i.Location)
+                    .Include(i=> i.Cars.Vehicles)
+                    .AsNoTracking()
+                    .FirstOrDefault();
+                result.Cars.Vehicles = result.Cars.Vehicles.Where(a => a.Id == carId).ToList();
+                return result;
+            }
         }
     }
 }

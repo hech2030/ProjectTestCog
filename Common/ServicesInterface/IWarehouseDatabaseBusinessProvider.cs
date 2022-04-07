@@ -8,5 +8,7 @@ namespace TestProject.Common.ServicesInterface
         void InitDatabase();
         IList<VehiculeModel> FindVehicule();
 
+        WarehouseModel FindWarehouse(int carId);
+
     }
 }
